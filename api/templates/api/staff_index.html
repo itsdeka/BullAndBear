@@ -1,0 +1,16 @@
+{% extends 'api/base.html' %}
+
+{% block content %}
+
+<h2>Benvenuto nella sezione riservata allo staff</h2><br>
+<p><a href="../post_numbers">Lista degli utenti e quantità di post pubblicati</a></p>
+<p><a href="../json">Dettagli dei post pubblicati nell'ultima ora in file JSON</a></p>
+
+<div>
+    <p>Cerca quante volte una stringa ricorre nei post:</p>
+    <form action="{% url 'search' %}" method="get">
+        <input name='q' type='text' placeholder="Inserisci la stringa" value="{{request.GET.q}}">
+        <input type="submit">
+    </form>
+</div>
+{% endblock %}

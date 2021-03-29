@@ -1,0 +1,8 @@
+{% extends 'api/base.html' %}
+
+{% block content %}
+{% csrf_token %}
+{% for username, num in num_post.items %}
+  <li>{{ username }} ha pubblicato {{ num }} post</li>
+{% endfor %}
+{% endblock %}

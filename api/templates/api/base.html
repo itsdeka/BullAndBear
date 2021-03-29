@@ -1,0 +1,38 @@
+{% load static %}
+<html>
+    <head>
+        <title>Bull & Bear</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Metamorphous&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'css/api.css' %}">
+    </head>
+    <body>
+        <div class="page-header">
+            <a href="/"><img src="https://i.ibb.co/j6QcPKj/Toro-senza-sfondo.png" alt="Toro-senza-sfondo" width="120px" height="120px" border="0" align="left">
+            <img src="https://i.ibb.co/hsShtK5/Orso-senza-sfondo.png" alt="Orso-senza-sfondo" width="120px" height="120px" border="0" align="right">
+            <h1>Bull & Bear</h1>
+            <p class="sub">Cryptomarket's Predictions Bulletin Board</p></a>
+        </div>
+        <div class="navbar">
+            {% if user.is_authenticated %}
+            <b><p>| Ciao {{ user.username }}! |
+                <a href="{% url 'post_new' %}">Aggiungi un nuovo post
+                <span class="glyphicon glyphicon-plus"></span></a> |
+                <a href="{% url 'logout' %}">Log Out </a></p></b>
+            {% endif %}
+            {% for message in messages %}
+                <b></b><p>{{message}}</p></b>
+            {% endfor %}
+        </div>
+        <div class="content container">
+            <div class="row">
+                <div class="col-md-8">
+                    {% block content %}
+                    {% endblock %}
+               </div>
+            </div>
+        </div>
+    </body>
+</html>

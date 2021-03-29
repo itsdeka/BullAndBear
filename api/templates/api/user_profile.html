@@ -1,0 +1,16 @@
+{% extends 'api/base.html' %}
+
+{% block content %}
+{% csrf_token %}
+<h3> Benvenuto nel profilo di {{ user.username }} </h3> <br>
+<h4> in questa pagina puoi vedere tutti i contenuti pubblicati dell'utente</h4> <br>
+
+            {% for post in userPosts %}
+            <div class="post">
+            <h2>{{post.title}}</h2>
+            <p>{{post.text}}</p>
+            <p class="date">Pubblicato il: {{ post.published_date }}</p>
+            </div><hr>
+            {% endfor %}
+
+{% endblock %}

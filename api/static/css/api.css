@@ -1,0 +1,72 @@
+body {
+        background: #e8e1d3;
+}
+
+.page-header{
+    text-align: center;
+    background: #967642;
+    margin-top: 0;
+    margin-bottom: 0;
+    width = 100%;
+    padding-top: 5px;
+}
+
+.page-header h1 {
+    font-size: 40pt;
+}
+
+.page-header, .page-header a, .page-header a:visited, .page-header a:active {
+    font-family: 'Metamorphous', cursive;
+    color : #000000;
+    text-decoration: none;
+}
+
+.sub{
+    font-size: 12pt;
+    margin top 3px;
+}
+
+.content{
+    margin-left: 40px;
+}
+
+
+.date {
+    color: #828282;
+}
+
+.save {
+    float:right;
+}
+
+.post-form textarea, .post-form input {
+    width: 100%;
+}
+
+.post{
+    margin-bottom: 30px;
+}
+
+.post h2 a, .post h2 a:visited {
+    color: #000000;
+    font-family: 'Metamorphous', cursive;
+}
+
+.navbar {
+    margin-top: 0px;
+    background: #b8b8b8;
+}
+
+.navbar p, .navbar a {
+    font-family: 'Metamorphous', cursive;
+    text-size: 20px;
+    text-align:center;
+    padding-top:15px;
+    text-decoration: none;
+    color: #000000
+
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Metamorphous', cursive;
+}

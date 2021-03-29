@@ -1,0 +1,21 @@
+{% extends 'api/base.html' %}
+
+{% block content %}
+
+<h3>Registrazione nuovo utente</h3><br>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <b>{{form.username.label}}</b> {{form.username}}<br><br>
+        <b>{{form.email.label}}</b> {{form.email}}<br><br>
+        <b>{{form.password1.label}}</b> {{form.password1}}<br><br>
+        <b>{{form.password2.label}}</b> {{form.password2}}<br><br>
+        <input type="submit" value="Registrati">
+    </form>
+
+    {{form.errors}}
+
+<h4>Sei già registrato? Vai al <a href="../login">login</a>!</h4>
+
+{% endblock %}
