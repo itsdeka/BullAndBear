@@ -20,7 +20,7 @@
             <b><p>| Ciao {{ user.username }}! |
                 <a href="{% url 'post_new' %}">Aggiungi un nuovo post
                 <span class="glyphicon glyphicon-plus"></span></a> |
-                <a href="{% url 'logout' %}">Log Out </a></p></b>
+                <a href="{% url 'logout' %}">Log Out |</a></p></b>
             {% endif %}
             {% for message in messages %}
                 <b></b><p>{{message}}</p></b>
