@@ -1,20 +1,26 @@
 {% extends 'api/base.html' %}
 
 {% block content %}
+        <div class="navbar">
+            {% for message in messages %}
+                <b></b><p>{{message}}</p></b>
+            {% endfor %}
+        </div>
+    <div class="content">
+        <h3>Accedi per vedere i contenuti della bacheca</h3><br>
 
-<h3>Accedi per vedere i contenuti della bacheca</h3><br>
+        <form method="post">
 
- <form method="post">
+            {% csrf_token %}
 
-    {% csrf_token %}
+            <input type="text" name="username" placeholder="Username" class="form-control" style="width:200px"><br>
+            <input type="password" name="password" placeholder="Password" class="form-control" style="width:200px"><br>
 
-    <input type="text" name="username" placeholder="Username" class="form-control" style="width:200px"><br>
-    <input type="password" name="password" placeholder="Password" class="form-control" style="width:200px"><br>
-
-    <input type="submit" value="Login">
-</form>
+            <input type="submit" value="Login">
+        </form>
 
 
 
-<h4> Non sei ancora registrato? <a href="../sign_up">Registrati</a>!</h4>
+        <h4> Non sei ancora registrato? <a href="../sign_up">Registrati</a>!</h4>
+    </div>
 {% endblock %}

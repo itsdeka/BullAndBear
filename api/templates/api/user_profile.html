@@ -1,10 +1,11 @@
 {% extends 'api/base.html' %}
-
 {% block content %}
 {% csrf_token %}
-<h3> Benvenuto nel profilo di {{ user.username }} </h3> <br>
-<h4> in questa pagina puoi vedere tutti i contenuti pubblicati dell'utente</h4> <br>
-
+        <div class="navbar">
+            <b><p>| Benvenuto nel profilo di {{ user.username }} |
+                <a href="{% url 'post_list' %}">Torna alla bacheca</a> |</p></b>
+        </div>
+        <div class="content">
             {% for post in userPosts %}
             <div class="post">
             <h2>{{post.title}}</h2>
@@ -12,5 +13,5 @@
             <p class="date">Pubblicato il: {{ post.published_date }}</p>
             </div><hr>
             {% endfor %}
-
+        </div>
 {% endblock %}

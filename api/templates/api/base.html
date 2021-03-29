@@ -15,24 +15,7 @@
             <h1>Bull & Bear</h1>
             <p class="sub">Cryptomarket's Predictions Bulletin Board</p></a>
         </div>
-        <div class="navbar">
-            {% if user.is_authenticated %}
-            <b><p>| Ciao {{ user.username }}! |
-                <a href="{% url 'post_new' %}">Aggiungi un nuovo post
-                <span class="glyphicon glyphicon-plus"></span></a> |
-                <a href="{% url 'logout' %}">Log Out |</a></p></b>
-            {% endif %}
-            {% for message in messages %}
-                <b></b><p>{{message}}</p></b>
-            {% endfor %}
-        </div>
-        <div class="content container">
-            <div class="row">
-                <div class="col-md-8">
-                    {% block content %}
-                    {% endblock %}
-               </div>
-            </div>
-        </div>
+        {% block content %}
+        {% endblock %}
     </body>
 </html>

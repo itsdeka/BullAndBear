@@ -1,7 +1,11 @@
 {% extends 'api/base.html' %}
 
 {% block content %}
+    <div class="navbar">
+            <b><p>|<a href="{% url 'post_list' %}"> Torna alla bacheca </a> |</p></b>
+    </div>
 
-Nessun utente corrisponde a questo id
-
+    <div class="content">
+        Nessun utente corrisponde a questo id
+    </div>
 {% endblock %}

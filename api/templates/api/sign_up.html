@@ -1,9 +1,10 @@
 {% extends 'api/base.html' %}
 
 {% block content %}
-
+        <div class="navbar">
+        </div>
+    <div class="content">
 <h3>Registrazione nuovo utente</h3><br>
-
     <form method="post">
         {% csrf_token %}
 
@@ -17,5 +18,5 @@
     {{form.errors}}
 
 <h4>Sei già registrato? Vai al <a href="../login">login</a>!</h4>
-
+    </div>
 {% endblock %}

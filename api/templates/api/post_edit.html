@@ -1,10 +1,21 @@
 {% extends 'api/base.html' %}
 
 {% block content %}
+        <div class="navbar">
+            <b><p>| Ciao {{ user.username }}! |
+                <a href="{% url 'post_new' %}">Aggiungi un nuovo post
+                <span class="glyphicon glyphicon-plus"></span></a> |
+                <a href="{% url 'logout' %}">Log Out |</a></p></b>
+            {% for message in messages %}
+                <b></b><p>{{message}}</p></b>
+            {% endfor %}
+        </div>
+    <div class="content">
     <h2>Scrivi un nuovo post</h2>
     <form method="POST" class="post-form">
         {% csrf_token %}
     {{ form.as_p }}
     <button type="submit" class="save btn btn-default">Save</button>
     </form>
+    </div>
 {% endblock %}
