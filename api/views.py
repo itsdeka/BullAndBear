@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Post
+from .models import Post, UserIp
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -10,16 +10,33 @@ from django.http import HttpResponse
 from .forms import RegisterForm, PostForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
+from .utils import sendTransaction
+import hashlib
 
+
+#Richiesta n°8 funzione per la lettura dell'IP del client.
+def getIp(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[-1].strip()
+    elif request.META.get('HTTP_X_REAL_IP'):
+        ip = request.META.get('HTTP_X_REAL_IP')
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
 
 #Richiesta n°1 una pagina da cui è possibile far registrare ed accedere gli utenti.
 def registerPage(request):
     if request.user.is_authenticated:
         return redirect('post_list')
     form = RegisterForm(request.POST)
+#    modelIp = UserIp()
     if form.is_valid():
         form.save()
         user = form.cleaned_data.get('username')
+#        modelIp.user = User.objects.get(username=user)
+#        modelIp.ip = getIp(request)
+#        modelIp.save()
         messages.success(request,'Account creato con successo, benvenuto '+ user)
         return redirect('log-in')
     context = {'form':form}
@@ -36,6 +53,11 @@ def loginPage(request):
 
         if user is not None:
             login(request, user)
+#            lastIp = UserIp.objects.get(user=user)
+#            if not lastIp.ip == getIp(request):
+#                lastIp.ip = getIp(request)
+#                lastIp.save()
+#                messages.info(request,"Attenzione il tuo ip è cambiato dall'ultima sessione")
             return redirect('post_list')
         else:
             messages.info(request, 'Nome utente o Password non corretti')
@@ -58,6 +80,8 @@ def post_new(request):
             post = form.save(commit=False)
             post.author = request.user
             post.published_date = timezone.now()
+            post.hash = hashlib.sha256(post.content.encode('utf-8')).hexdigest()
+            post.txId = sendTransaction(post.text)
             post.save()
             return redirect('post_list')
     else:

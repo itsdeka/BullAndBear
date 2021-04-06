@@ -8,6 +8,7 @@ class RegisterForm(UserCreationForm):
         model = User
         fields = ['username', 'email', 'password1', 'password2', ]
 
+
 class PostForm(forms.ModelForm):
     title = forms.CharField(label='', widget=forms.TextInput(attrs={"placeholder": "Inserire Titolo"}))
     text = forms.CharField
