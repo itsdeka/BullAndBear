@@ -11,4 +11,4 @@ urlpatterns = [
     path('utente/<int:pk>/', views.user_profile, name="profilo-utente"),
     path('staff/json/', views.last_hour, name="json-response"),
     path('staff/search/', views.search, name='search'),
-    ]
+]

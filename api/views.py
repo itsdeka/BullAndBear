@@ -30,13 +30,13 @@ def registerPage(request):
     if request.user.is_authenticated:
         return redirect('post_list')
     form = RegisterForm(request.POST)
-#    modelIp = UserIp()
+    modelIp = UserIp()
     if form.is_valid():
         form.save()
         user = form.cleaned_data.get('username')
-#        modelIp.user = User.objects.get(username=user)
-#        modelIp.ip = getIp(request)
-#        modelIp.save()
+        modelIp.user = User.objects.get(username=user)
+        modelIp.ip = getIp(request)
+        modelIp.save()
         messages.success(request,'Account creato con successo, benvenuto '+ user)
         return redirect('log-in')
     context = {'form':form}
@@ -53,11 +53,11 @@ def loginPage(request):
 
         if user is not None:
             login(request, user)
-#            lastIp = UserIp.objects.get(user=user)
-#            if not lastIp.ip == getIp(request):
-#                lastIp.ip = getIp(request)
-#                lastIp.save()
-#                messages.info(request,"Attenzione il tuo ip è cambiato dall'ultima sessione")
+            lastIp = UserIp.objects.get(user=user)
+            if not lastIp.ip == getIp(request):
+                lastIp.ip = getIp(request)
+                lastIp.save()
+                messages.info(request,"Attenzione il tuo ip è cambiato dall'ultima sessione")
             return redirect('post_list')
         else:
             messages.info(request, 'Nome utente o Password non corretti')
@@ -80,8 +80,8 @@ def post_new(request):
             post = form.save(commit=False)
             post.author = request.user
             post.published_date = timezone.now()
-            post.hash = hashlib.sha256(post.content.encode('utf-8')).hexdigest()
-            post.txId = sendTransaction(post.text)
+            post.hash = hashlib.sha256(post.text.encode('utf-8')).hexdigest()
+            post.txId = sendTransaction(post.hash)
             post.save()
             return redirect('post_list')
     else:

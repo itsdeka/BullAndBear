@@ -14,11 +14,9 @@ class Post(models.Model):
     hash = models.CharField(max_length=32, default=None, null=True)
     txId = models.CharField(max_length=66, default=None, null=True)
 
-
-
     def publish(self):
         self.published_date = timezone.now()
-        self.hash = hashlib.sha256(self.content.encode('utf-8')).hexdigest()
+        self.hash = hashlib.sha256(self.text.encode('utf-8')).hexdigest()
         self.txId = sendTransaction(self.hash)
         self.save()
 
@@ -30,4 +28,4 @@ class UserIp(models.Model):
     ip = models.CharField(max_length=20)
 
     def __str__(self):
-        return self.user
+        return self.user.email
